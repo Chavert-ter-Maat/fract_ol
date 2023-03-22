@@ -3,6 +3,8 @@
 		"complex": "c",
 		"__locale": "cpp",
 		"atomic": "cpp",
-		"cstdint": "cpp"
+		"cstdint": "cpp",
+		"mlx42.h": "c",
+		"ios": "c"
 	}
 }

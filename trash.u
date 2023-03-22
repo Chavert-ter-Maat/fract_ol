@@ -38,3 +38,16 @@
 // {
 //     return (r << 24 | g << 16 | b << 8 | a);
 // }
+
+
+// coloring
+
+// hooks
+
+// initialize
+
+// julia
+
+// main
+
+// mandelbrot

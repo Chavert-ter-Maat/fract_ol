@@ -6,7 +6,7 @@
 #    By: chaverttermaat <chaverttermaat@student.      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/07 10:49:31 by chavertterm   #+#    #+#                  #
-#    Updated: 2023/03/20 12:32:06 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/03/22 13:48:35 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,11 @@ LIBFT = ./libft/libft.a
 MLX = ./MLX42/build/libmlx42.a
 
 # SOURCES
-SRC =	main.c \
+SRC =	coloring.c \
+		hooks.c \
+		initialize_mlx.c \
+		initialize_parameters.c \
+		main.c \
 		mandelbrot.c \
 		
 		
@@ -53,7 +57,7 @@ make comp: all clean
 	 
 $(NAME): $(OBJ)
 	$(MAKE) -C ./MLX42/build
-	$(CC) $(LDFLAGS) $(OBJ) $(INCLUDES) $(MLX) $(LIBFT) $(PRINTF) $(CFLAGS) -o $(NAME) 
+	$(CC) $(LDFLAGS) $(OBJ) $(INCLUDES) $(MLX) $(LIBFT) $(PRINTF) $(CFLAGS) $(SANITIZE) -o $(NAME) 
 	@echo "$(GREEN) Fract-ol compiled $(DEF_COLOR)"
 	 
 clean:
