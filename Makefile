@@ -6,7 +6,7 @@
 #    By: chaverttermaat <chaverttermaat@student.      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/07 10:49:31 by chavertterm   #+#    #+#                  #
-#    Updated: 2023/03/22 13:48:35 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/03/24 18:07:33 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ SRC =	coloring.c \
 		initialize_mlx.c \
 		initialize_parameters.c \
 		main.c \
-		mandelbrot.c \
 		
 		
 # OBJECTS

@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 09:54:07 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/22 14:59:35 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/03/24 16:02:01 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int32_t main(int32_t argc, char **argv)
 		ft_printf("input error");
 		exit (EXIT_FAILURE);
 	}
-	init(&struc, argv[1]);
-	initialize(&struc);
+	init_param(&struc, argv[1]);
+	init_mlx(&struc);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 13:05:51 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/22 16:51:24 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/03/24 17:55:20 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void mandelbrot(t_mandelbrot *mandelbrot) 
 {
     int y = 0;
-
+	int	row_output = 0;
     // loop over each row of the output image
     while (y < mandelbrot->height) 
     {

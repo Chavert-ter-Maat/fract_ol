@@ -6,13 +6,13 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/21 11:31:11 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/22 14:32:18 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/03/24 17:57:21 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void initialize(t_struct *struc)
+void init_mlx(t_struct *struc)
 {
 	open_screen(struc);
 	new_image(struc);
@@ -20,7 +20,7 @@ void initialize(t_struct *struc)
 	hooks(struc);
 }
 
-void open_screen(t_struct *struc)
+ void open_screen(t_struct *struc)
 {
 	if (!(struc->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{

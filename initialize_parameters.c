@@ -6,16 +6,16 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/22 10:31:19 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/22 15:16:50 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/03/24 18:18:14 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void init(t_struct *struc, char *argv)
+void init_param(t_struct *struc, char *argv)
 {
 	init_type(struc, argv);
-	init_mandelbrot(struc->mandelbrot);
+	init_mandelbrot(&struc->mandelbrot);
 }
 
 void init_type(t_struct *struc, char *argv)

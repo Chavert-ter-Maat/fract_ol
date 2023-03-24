@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 11:23:20 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/22 15:22:19 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/03/24 18:18:20 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,12 @@
 # define WIDTH 		500
 # define HEIGHT		500
 
-// structures
-typedef struct 	s_struct
-{	
-	mlx_image_t		*image;
-	mlx_t			*mlx;
-	t_screen		*screen;
-	t_mandelbrot	*mandelbrot;
-	int				choice;
-	char			**argv;
-} 	t_struct;
-
 typedef struct s_screen
 {
-	int		min_x;
-	int		max_x;
-	int		min_y;
-	int		max_y;
+	double		min_x;
+	double		max_x;
+	double		min_y;
+	double		max_y;
 }	t_screen;
 
 typedef struct s_mandelbrot
@@ -55,31 +44,41 @@ typedef struct s_mandelbrot
 	double	y_offset;
 }	t_mandelbrot;
 
+// structures
+typedef struct 	s_struct
+{		
+	mlx_image_t			*image;
+	mlx_t				*mlx;
+	t_screen			screen;
+	t_mandelbrot		mandelbrot;
+	int					choice;
+	char				**argv;
+} 	t_struct;
+
 // coloring
 
 // hooks
 void ft_hook(void* param);
 
 // mandelbrot
-void mandelbrot(t_mandelbrot *mandelbrot);
+/*void mandelbrot(t_mandelbrot *mandelbrot);*/
 
 // initialize mlx
-void initialize(t_struct *struc);
+void init_mlx(t_struct *struc);
 void open_screen(t_struct *struc);
 void new_image(t_struct *struc);
 void image_to_window(t_struct *struc);
 void hooks(t_struct *struc);
 
 // initialize parameters
-
+void init_param(t_struct *struc, char *argv);
+void init_type(t_struct *struc, char *argv);
+void	init_screen_settings(t_screen *screen);
+void	init_mandelbrot(t_mandelbrot *mandelbrot);
 
 // julia
 
 // main
 void put_pixel(void* param);
-void init(t_struct *struc, char *argv);
-
-
-
 
 #endif
