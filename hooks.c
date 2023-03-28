@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/21 11:32:08 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/22 13:40:32 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/03/28 14:47:28 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void ft_hook(void* param)
 {
-	t_struct *struc;
+	t_fractol *generate;
 
-	struc = param;
-	if (mlx_is_key_down(struc->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(struc->mlx);
-	if (mlx_is_key_down(struc->mlx, MLX_KEY_UP))
-		struc->image->instances[0].y -= 10;
-	if (mlx_is_key_down(struc->mlx, MLX_KEY_DOWN))
-		struc->image->instances[0].y += 10;
-	if (mlx_is_key_down(struc->mlx, MLX_KEY_LEFT))
-		struc->image->instances[0].x -= 10;
-	if (mlx_is_key_down(struc->mlx, MLX_KEY_RIGHT))
-		struc->image->instances[0].x += 10;
+	generate = param;
+	if (mlx_is_key_down(generate->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(generate->mlx);
+	if (mlx_is_key_down(generate->mlx, MLX_KEY_UP))
+		generate->image->instances[0].y -= 10;
+	if (mlx_is_key_down(generate->mlx, MLX_KEY_DOWN))
+		generate->image->instances[0].y += 10;
+	if (mlx_is_key_down(generate->mlx, MLX_KEY_LEFT))
+		generate->image->instances[0].x -= 10;
+	if (mlx_is_key_down(generate->mlx, MLX_KEY_RIGHT))
+		generate->image->instances[0].x += 10;
 }

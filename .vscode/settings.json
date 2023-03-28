@@ -5,6 +5,7 @@
 		"atomic": "cpp",
 		"cstdint": "cpp",
 		"mlx42.h": "c",
-		"ios": "c"
+		"ios": "c",
+		"memory": "c"
 	}
 }

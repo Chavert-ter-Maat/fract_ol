@@ -6,7 +6,7 @@
 #    By: chaverttermaat <chaverttermaat@student.      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/07 10:49:31 by chavertterm   #+#    #+#                  #
-#    Updated: 2023/03/24 18:07:33 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/03/28 15:26:09 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,10 @@
 NAME 	= fractol
 CC 		= gcc
 CFLAGS 	= -Wall -Wextra -Werror
+ifdef DEBUG
+	CFLAGS +=-g
+endif
+
 RM 		= rm -f
 SANITIZE = -fsanitize=address
 LDFLAGS	?= -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -o3 -march=native
@@ -27,11 +31,14 @@ LIBFT = ./libft/libft.a
 MLX = ./MLX42/build/libmlx42.a
 
 # SOURCES
-SRC =	coloring.c \
+SRC =	burning_ship.c \
+		coloring.c \
 		hooks.c \
 		initialize_mlx.c \
 		initialize_parameters.c \
+		init_fractals.c \
 		main.c \
+		mandelbrot.c \
 		
 		
 # OBJECTS
@@ -51,7 +58,7 @@ WHITE 		= \033[0;97m
 # RULES
 all: $(NAME)
 
-make comp: all clean
+make comp: re all clean
 	@echo "$(GREEN) Run that shit! $(DEF_COLOR)"
 	 
 $(NAME): $(OBJ)
@@ -59,6 +66,12 @@ $(NAME): $(OBJ)
 	$(CC) $(LDFLAGS) $(OBJ) $(INCLUDES) $(MLX) $(LIBFT) $(PRINTF) $(CFLAGS) $(SANITIZE) -o $(NAME) 
 	@echo "$(GREEN) Fract-ol compiled $(DEF_COLOR)"
 	 
+debug:
+	$(MAKE) DEBUG=1
+
+rebug: fclean
+	$(MAKE) debug
+	
 clean:
 	$(RM) $(OBJ)
 	@echo "$(YELLOW) Fract-ol object files cleaned $(DEF_COLOR)"

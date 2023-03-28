@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 11:23:20 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/24 18:18:20 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/03/28 16:09:00 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <math.h>
 # include "./libft/libft.h"
 # include "./libft/ft_printf/ft_printf.h"
 # include "./MLX42/include/MLX42/MLX42.h"
@@ -25,6 +26,26 @@
 // defines
 # define WIDTH 		500
 # define HEIGHT		500
+# define CORRECT	0
+
+typedef enum e_choice
+{
+	MANDELBROT,
+	JULIA,
+	BURNINGSHIP,
+}	t_choice;
+
+// structures
+
+typedef struct s_mods
+{
+	int		width;
+	int		height;
+	int		max_iter;
+	double	zoom;
+	double	x_offset;
+	double	y_offset;
+}	t_mods;
 
 typedef struct s_screen
 {
@@ -34,51 +55,40 @@ typedef struct s_screen
 	double		max_y;
 }	t_screen;
 
-typedef struct s_mandelbrot
-{
-	int		width;
-	int		height;
-	int		max_iter;
-	double	zoom;
-	double	x_offset;
-	double	y_offset;
-}	t_mandelbrot;
-
-// structures
-typedef struct 	s_struct
+typedef struct 	s_fractol
 {		
 	mlx_image_t			*image;
 	mlx_t				*mlx;
 	t_screen			screen;
-	t_mandelbrot		mandelbrot;
+	t_mods				mods;
 	int					choice;
 	char				**argv;
-} 	t_struct;
+} 	t_fractol;
 
 // coloring
 
 // hooks
-void ft_hook(void* param);
+void	ft_hook(void* param);
 
-// mandelbrot
-/*void mandelbrot(t_mandelbrot *mandelbrot);*/
+// fractals
+void	init_mandelbrot(t_fractol *generate);
+void	init_burningship(t_fractol *generate);
 
 // initialize mlx
-void init_mlx(t_struct *struc);
-void open_screen(t_struct *struc);
-void new_image(t_struct *struc);
-void image_to_window(t_struct *struc);
-void hooks(t_struct *struc);
+void	init_mlx(t_fractol *generate);
+void	open_screen(t_fractol *generate);
+void	new_image(t_fractol *generate);
+void 	init_fractal(t_fractol	*generate);
+void	image_to_window(t_fractol *generate);
+void	hooks(t_fractol *generate);
 
 // initialize parameters
-void init_param(t_struct *struc, char *argv);
-void init_type(t_struct *struc, char *argv);
+void	init_param(t_fractol *generate, char *argv);
+void	init_type(t_fractol *generate, char *argv);
 void	init_screen_settings(t_screen *screen);
-void	init_mandelbrot(t_mandelbrot *mandelbrot);
-
-// julia
+void	init_mods(t_mods *mods);
 
 // main
-void put_pixel(void* param);
+void	put_pixel(void* param);
 
 #endif

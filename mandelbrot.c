@@ -6,65 +6,61 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 13:05:51 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/24 17:55:20 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/03/28 15:07:28 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <math.h>
-#include <stdio.h>
 
-void mandelbrot(t_mandelbrot *mandelbrot) 
+int iterations(double real, double imag, t_fractol *generate) 
 {
-    int y = 0;
-	int	row_output = 0;
-    // loop over each row of the output image
-    while (y < mandelbrot->height) 
+    double z_real = 0.0;
+    double z_imag = 0.0;
+    double next_z_real, next_z_imag;
+    int iter = 0;
+    while (iter < generate->mods.max_iter && (z_real * z_real + z_imag * z_imag) <= 4.0)
     {
-        int x = 0;
-        // loop over each pixel in the current row
-        while (x < mandelbrot->width)
-        {
-            // calculate the real and imaginary parts of the current pixel's position
-            double real = ((double)x - mandelbrot->width / 2.0) / (mandelbrot->zoom * mandelbrot->width) + mandelbrot->x_offset;
-            double imag = ((double)y - mandelbrot->height / 2.0) / (mandelbrot->zoom * mandelbrot->height) + mandelbrot->y_offset;
+        next_z_real = z_real * z_real - z_imag * z_imag + real;
+        next_z_imag = 2 * z_real * z_imag + imag;
+        z_real = next_z_real;
+        z_imag = next_z_imag;
+        iter++;
+    }
+    return iter;
+}
 
-            // initialize the variables for the Mandelbrot calculation
-            double z_real = 0;
-            double z_imag = 0;
-            int i = 0;
+void put_pixel_x(int y, t_fractol *generate) 
+{
+    double c_real, c_imag;
+    int iter, x;
 
-            // iterate until the maximum number of iterations is reached or the sequence escapes
-           
-		   
-		    while (i < mandelbrot->max_iter) 
-            {
-                double next_z_real = z_real * z_real - z_imag * z_imag + real;
-                double next_z_imag = 2 * z_real * z_imag + imag;
-
-                // if the sequence escapes, break out of the loop
-                if (fabs(next_z_real) > 2.0 || fabs(next_z_imag) > 2.0) 
-                    break;
-
-                // otherwise update the variables for the next iteration
-                z_real = next_z_real;
-                z_imag = next_z_imag;
-                i++;
-            }
-
-            // assign a character to the current pixel based on the number of iterations required
-            if (i == mandelbrot->max_iter) 
-                row_output[x] = '*';
-            else if (i < mandelbrot->max_iter && i > 10)
-                row_output[x] = '.';
-            else 
-                row_output[x] = ' ';
-            x++;
-        }
-
-        // print the current row of output
-        printf("%s\n", row_output);
-        y++;
+    x = 0;
+    while (x < WIDTH) 
+    {
+        c_real = generate->screen.min_x + x * generate->mods.x_offset;
+        c_imag = generate->screen.min_y + y * generate->mods.y_offset;
+        iter = iterations(c_real, c_imag, generate);
+        
+        // Map the number of iterations to a color value
+        int color = iter % 256;
+        color = color * 256 + (255 - color) * 256 * 256;
+        
+        mlx_put_pixel(generate->image, x, y, color);
+        x++;
     }
 }
 
+void init_mandelbrot(t_fractol *generate) 
+{
+    t_screen screen = generate->screen;
+    int y = 0;
+
+    generate->mods.x_offset = (screen.max_x - screen.min_x) / WIDTH;
+    generate->mods.y_offset = (screen.max_y - screen.min_y) / HEIGHT;
+
+    while (y < HEIGHT) 
+    {
+        put_pixel_x(y, generate);
+        y++;
+    }
+}
