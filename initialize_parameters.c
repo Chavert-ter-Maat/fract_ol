@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/22 10:31:19 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/28 15:28:01 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/03/30 12:31:11 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ void	init_mods(t_mods *mods)
 	ft_bzero(mods, sizeof(*mods));
 	mods->width = 500;
 	mods->height = 500;
-	mods->zoom = 0.3;
-	mods->max_iter = 5;
+	mods->zoom = 0.1;
+	mods->max_iter = 100;
 }

@@ -9,14 +9,12 @@
 //  and performs the Mandelbrot calculation until either the sequence escapes
 //   or the maximum number of iterations is reached.
 
-static int iterations(double real, double imag, t_fractol *generate) 
+static int	iterations(int iter, double real, double imag, t_fractol *generate) 
 {
-	double z_real;
-	double z_imag;
+	double	z_real;
+	double	z_imag;
 	double	next_z_real;
 	double	next_z_imag;
-	int iter;
-
 	
 	z_real = 0.0;
 	z_imag = 0.0;
@@ -44,20 +42,20 @@ static int iterations(double real, double imag, t_fractol *generate)
 // pixel , along with the current mandelbrot generatet, and calculates 
 // the corresponding real and imaginary parts of the position in the complex plane.
 
-static void put_pixel_x(int y, t_fractol *generate) 
+static void	put_pixel_x(int y, t_fractol *generate) 
 {
 	double	c_real;
 	double	c_imag;
-	int iter;
-	int x;
+	int		iter;
+	int		x;
 
 	x = 0;
 	iter = 0;
-	while (x < WIDTH) 
+	while (x < WIDTH)
 	{
 		c_real = generate->screen.min_x + x * generate->mods.x_offset;
 		c_imag = generate->screen.min_y + y * generate->mods.y_offset;
-		iter = iterations(c_real, c_imag, generate);
+		iter = iterations(iter, c_real, c_imag, generate);
 		if (iter == generate->mods.max_iter)
 			mlx_put_pixel(generate->image, x, y, 0xFFFFFFFF);
 		else 
@@ -74,16 +72,15 @@ static void put_pixel_x(int y, t_fractol *generate)
 // the row of output characters based on the number of iterations
 // required for each pixel.
 
-void init_burningship(t_fractol *generate) 
+void	init_burningship(t_fractol *generate) 
 {
-	int y;
-	t_screen screen;
-	
+	int			y;	
+	t_screen	screen;
+
+	y = 0;
 	screen = generate->screen;
 	generate->mods.x_offset = (screen.max_x - screen.min_x) / WIDTH;
 	generate->mods.y_offset = (screen.max_y - screen.min_y) / HEIGHT;
-
-	y = 0;
 	while (y < HEIGHT) 
 	{
 		put_pixel_x(y, generate);
