@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   initialize_parameters.c                            :+:    :+:            */
+/*   parameters.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/22 10:31:19 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/03 10:49:38 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/03 14:29:22 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	init_mods(t_mods *mods)
 	ft_bzero(mods, sizeof(*mods));
 	mods->width = 500;
 	mods->height = 500;
-	mods->zoom = 0.1;
+	mods->zoom = 1;
 	mods->max_iter = 100;
+	mods->zoom_in = 1.0;
+	mods->zoom_out = 1.0;
+	mods->zoom_factor = 0.005;
 }

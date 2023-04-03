@@ -6,7 +6,7 @@
 #    By: chaverttermaat <chaverttermaat@student.      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/07 10:49:31 by chavertterm   #+#    #+#                  #
-#    Updated: 2023/04/03 10:52:47 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/04/03 15:30:01 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,14 +31,15 @@ LIBFT = ./libft/libft.a
 MLX = ./MLX42/build/libmlx42.a
 
 # SOURCES
-SRC =	SRC/burning_ship.c \
+SRC =	SRC/fractal_burning_ship.c \
+		SRC/fractal_mandelbrot.c \
 		SRC/coloring.c \
-		SRC/hooks.c \
-		SRC/initialize_mlx.c \
-		SRC/initialize_parameters.c \
-		SRC/init_fractals.c \
+		SRC/hook_mlx.c \
+		SRC/parameters.c \
+		SRC/fractals.c \
 		SRC/main.c \
-		SRC/mandelbrot.c \
+		SRC/hook_navigation.c \
+		SRC/hook_zoom.c \
 		
 		
 # OBJECTS
@@ -56,15 +57,18 @@ CYAN 		= \033[0;96m
 WHITE 		= \033[0;97m
 
 # RULES
+$(NAME): $(OBJ)
+	$(MAKE) -C ./MLX42/build
+	$(MAKE) -C ./libft
+	$(MAKE) -C ./libft/ft_printf
+	$(CC) $(LDFLAGS) $(OBJ) $(INCLUDES) $(MLX) $(LIBFT) $(PRINTF) $(CFLAGS) $(SANITIZE) -o $(NAME) 
+	@echo "$(GREEN) Fract-ol compiled $(DEF_COLOR)"
+
+# RECIPES
 all: $(NAME)
 
 make comp: re all clean
 	@echo "$(GREEN) Run that shit! $(DEF_COLOR)"
-	 
-$(NAME): $(OBJ)
-	$(MAKE) -C ./MLX42/build
-	$(CC) $(LDFLAGS) $(OBJ) $(INCLUDES) $(MLX) $(LIBFT) $(PRINTF) $(CFLAGS) $(SANITIZE) -o $(NAME) 
-	@echo "$(GREEN) Fract-ol compiled $(DEF_COLOR)"
 	 
 debug:
 	$(MAKE) DEBUG=1
@@ -74,6 +78,8 @@ rebug: fclean
 	
 clean:
 	$(RM) $(OBJ)
+	$(MAKE) clean -C ./libft
+	$(MAKE) clean -C ./libft/ft_printf
 	@echo "$(YELLOW) Fract-ol object files cleaned $(DEF_COLOR)"
 
 fclean: clean

@@ -7,6 +7,7 @@
 		"mlx42.h": "c",
 		"ios": "c",
 		"memory": "c",
-		"fractol.h": "c"
+		"fractol.h": "c",
+		"algorithm": "c"
 	}
 }

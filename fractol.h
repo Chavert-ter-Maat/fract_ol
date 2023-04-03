@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 11:23:20 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/03 10:49:22 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/03 15:29:45 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "./libft/libft.h"
 # include "./libft/ft_printf/ft_printf.h"
 # include "./MLX42/include/MLX42/MLX42.h"
+# include <string.h>
 
 // defines
 # define WIDTH 		500
@@ -45,6 +46,9 @@ typedef struct s_mods
 	double	zoom;
 	double	x_offset;
 	double	y_offset;
+	double	zoom_in;
+	double	zoom_out;
+	double	zoom_factor;
 }	t_mods;
 
 typedef struct s_screen
@@ -69,6 +73,7 @@ typedef struct 	s_fractol
 
 // hooks
 void	ft_hook(void* param);
+void	scroll_hook(double x_offset, double y_offset, void *param);
 
 // fractals
 void	init_mandelbrot(t_fractol *generate);
