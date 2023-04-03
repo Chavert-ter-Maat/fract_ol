@@ -6,6 +6,7 @@
 		"cstdint": "cpp",
 		"mlx42.h": "c",
 		"ios": "c",
-		"memory": "c"
+		"memory": "c",
+		"fractol.h": "c"
 	}
 }

@@ -6,7 +6,7 @@
 #    By: chaverttermaat <chaverttermaat@student.      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/07 10:49:31 by chavertterm   #+#    #+#                  #
-#    Updated: 2023/03/30 12:23:31 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/04/03 10:52:47 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME 	= fractol
 CC 		= gcc
 CFLAGS 	= -Wall -Wextra -Werror
 ifdef DEBUG
-	CFLAGS +=-g
+	CFLAGS += -g
 endif
 
 RM 		= rm -f
@@ -31,14 +31,14 @@ LIBFT = ./libft/libft.a
 MLX = ./MLX42/build/libmlx42.a
 
 # SOURCES
-SRC =	burning_ship.c \
-		coloring.c \
-		hooks.c \
-		initialize_mlx.c \
-		initialize_parameters.c \
-		init_fractals.c \
-		main.c \
-		mandelbrot.c \
+SRC =	SRC/burning_ship.c \
+		SRC/coloring.c \
+		SRC/hooks.c \
+		SRC/initialize_mlx.c \
+		SRC/initialize_parameters.c \
+		SRC/init_fractals.c \
+		SRC/main.c \
+		SRC/mandelbrot.c \
 		
 		
 # OBJECTS

@@ -1,4 +1,4 @@
-#include "fractol.h"
+#include "../fractol.h"
 
 // Perform Mandelbrot Calculation
 // Input: the current pixel's real and imaginary coordinates, 
@@ -19,7 +19,7 @@ static int	iterations(int iter, double real, double imag, t_fractol *generate)
 	z_real = 0.0;
 	z_imag = 0.0;
 	iter = 0;
-	while (iter < generate->mods.max_iter && (z_real + z_imag) <= 4.0) 
+	while (iter < generate->mods.max_iter && (z_real + z_imag) <= 4.0)
 	{
 		next_z_imag = 2 * z_real * z_imag + imag;
 		next_z_real = z_real - z_imag + real;

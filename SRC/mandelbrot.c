@@ -6,11 +6,11 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 13:05:51 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/30 11:45:56 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/03 10:49:33 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../fractol.h"
 
 static int iterations(int iter, double real, double imag, t_fractol *generate) 
 {

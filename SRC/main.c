@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   init_fractals.c                                    :+:    :+:            */
+/*   main.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/03/28 14:14:39 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/28 15:31:09 by cter-maa      ########   odam.nl         */
+/*   Created: 2023/03/16 09:54:07 by cter-maa      #+#    #+#                 */
+/*   Updated: 2023/04/03 10:49:27 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
-
-void 	init_fractal(t_fractol	*generate)
+#include "../fractol.h"
+	
+int32_t main(int32_t argc, char **argv)
 {
-	if (generate->choice == MANDELBROT)
-		init_mandelbrot(generate);
-	else if (generate->choice == JULIA)
-		{}
-	else if (generate->choice == BURNINGSHIP)
-		init_burningship(generate);
+	t_fractol	generate;
+	
+	if (argc != 2)
+	{
+		ft_printf(argv[0]);
+		ft_printf("input error");
+		exit (EXIT_FAILURE);
+	}
+	init_param(&generate, argv[1]);
+	init_mlx(&generate);
+	return (EXIT_SUCCESS);
 }

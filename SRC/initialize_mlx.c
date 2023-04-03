@@ -6,11 +6,11 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/21 11:31:11 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/28 16:17:06 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/03 10:49:40 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../fractol.h"
 
 void init_mlx(t_fractol *generate)
 {

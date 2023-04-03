@@ -6,11 +6,11 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/21 11:32:08 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/28 14:47:28 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/03 10:49:55 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../fractol.h"
 
 void ft_hook(void* param)
 {
@@ -28,3 +28,4 @@ void ft_hook(void* param)
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_RIGHT))
 		generate->image->instances[0].x += 10;
 }
+
