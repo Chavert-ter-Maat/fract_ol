@@ -6,7 +6,7 @@
 #    By: chaverttermaat <chaverttermaat@student.      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/07 10:49:31 by chavertterm   #+#    #+#                  #
-#    Updated: 2023/04/03 15:30:01 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/04/03 17:13:20 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,8 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+	$(MAKE) fclean -C ./libft
+	$(MAKE) fclean -C ./libft/ft_printf
 	@echo "$(BLUE) Fract-ol object files & executable cleaned $(DEF_COLOR)"
 
 re: fclean all
