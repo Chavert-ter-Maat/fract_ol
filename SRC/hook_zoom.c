@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/03 12:47:00 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/03 17:21:58 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/04 10:46:23 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	scroll_mandelbrot(t_fractol *generate, double y_offset)
 
 
 
-void	scroll_hook(double x_offset, double y_offset, void *param)
+void	mlx_scroll_hook(double x_offset, double y_offset, void *param)
 {
 		t_fractol *generate;
 
