@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   mandelbrot.c                                       :+:    :+:            */
+/*   fractal_mandelbrot.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 13:05:51 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/03 13:24:04 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/04 17:04:41 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-static int iterations(int iter, double real, double imag, t_fractol *generate) 
+static int iterations(int iter, double real, double imag, t_fractol *gen) 
 {
 	double z_real;
 	double z_imag;
-	double next_z_real;
+	double nxt_real;
 	double next_z_imag;
 
 	z_real = 0.0;
 	z_imag = 0.0;
 	iter = 0;
-	while (iter < generate->mods.max_iter && (z_real * z_real + z_imag * z_imag) <= 4.0)
+	while (iter < MAX_ITTER && (z_real * z_real + z_imag * z_imag) <= 4.0)
 	{
-		next_z_real = z_real * z_real - z_imag * z_imag + real;
-		next_z_imag = 2 * z_real * z_imag + imag;
-		z_real = next_z_real;
+		nxt_real = z_real * z_real - z_imag * z_imag + real + gen->nav.x_nav;
+		next_z_imag = 2 * z_real * z_imag + imag + gen->nav.y_nav;
+		z_real = nxt_real;
 		z_imag = next_z_imag;
 		iter++;
 	}
@@ -39,17 +39,23 @@ static void put_pixel_x(int y, t_fractol *generate)
 	double	c_imag;
 	int		x;
 	int		iter;
+	int	red;
 
 	x = 0;
 	while (x < WIDTH) 
 	{
-		c_real = generate->screen.min_x + x * generate->mods.x_offset;
-		c_imag = generate->screen.min_y + y * generate->mods.y_offset;
+		c_real = generate->screen.min_x + x * generate->nav.x_offset;
+		c_imag = generate->screen.min_y + y * generate->nav.y_offset;
 		iter = iterations(iter, c_real, c_imag, generate);
-		if (iter == generate->mods.max_iter)
+		if (iter == MAX_ITTER)
 			mlx_put_pixel(generate->image, x, y, 0xFFFFFFFF);
 		else 
-			mlx_put_pixel(generate->image, x, y, 0x00FFFFFF);
+			red = iter * 255 / MAX_ITTER; // map iteration count to red component
+			int green = (iter * iter) * 255 / (MAX_ITTER * MAX_ITTER); // map iteration count squared to green component
+			int blue = (iter * iter * iter) * 255 / (MAX_ITTER * MAX_ITTER * MAX_ITTER); // map iteration count cubed to blue component
+			int color = (red << 16) | (green << 8) | blue; // combine components into a single color
+
+			mlx_put_pixel(generate->image, x, y, color);
 		x++;
 	}
 }
@@ -61,8 +67,8 @@ void init_mandelbrot(t_fractol *generate)
 	
 	y = 0;	
 	screen = generate->screen;
-	generate->mods.x_offset = (screen.max_x - screen.min_x) / WIDTH;
-	generate->mods.y_offset = (screen.max_y - screen.min_y) / HEIGHT;
+	generate->nav.x_offset = (screen.max_x - screen.min_x) / WIDTH;
+	generate->nav.y_offset = (screen.max_y - screen.min_y) / HEIGHT;
 	while (y < HEIGHT) 
 	{
 		put_pixel_x(y, generate);

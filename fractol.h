@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 11:23:20 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/03 15:29:45 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/06 14:07:46 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define WIDTH 		500
 # define HEIGHT		500
 # define CORRECT	0
+# define FAILURE	-1
+# define MAX_ITTER	100
 
 typedef enum e_choice
 {
@@ -36,64 +38,75 @@ typedef enum e_choice
 	BURNINGSHIP,
 }	t_choice;
 
-// structures
+typedef enum e_color
+{
+	RAINBOW,
+}	t_color;
 
-typedef struct s_mods
+// structures
+typedef struct s_navigation
 {
 	int		width;
 	int		height;
-	int		max_iter;
 	double	zoom;
 	double	x_offset;
 	double	y_offset;
 	double	zoom_in;
 	double	zoom_out;
-	double	zoom_factor;
-}	t_mods;
+	double	nav_step;
+	double	zoom_multiplier;
+	double	y_nav;
+	double	x_nav;
+}	t_nav;
 
 typedef struct s_screen
 {
-	double		min_x;
-	double		max_x;
-	double		min_y;
-	double		max_y;
+	double	min_x;
+	double	max_x;
+	double	min_y;
+	double	max_y;
 }	t_screen;
 
 typedef struct 	s_fractol
 {		
-	mlx_image_t			*image;
-	mlx_t				*mlx;
-	t_screen			screen;
-	t_mods				mods;
-	int					choice;
-	char				**argv;
+	mlx_image_t	*image;
+	mlx_t		*mlx;
+	t_screen	screen;
+	t_nav		nav;
+	int			choice;
+	int			color;
+	char		**argv;
 } 	t_fractol;
 
-// coloring
 
 // hooks
-void	ft_hook(void* param);
-void	scroll_hook(double x_offset, double y_offset, void *param);
+void	hook(void* param);
+void	my_scrollhook(double x_offset, double y_offset, void *param);
+
 
 // fractals
 void	init_mandelbrot(t_fractol *generate);
 void	init_burningship(t_fractol *generate);
 
+
 // initialize mlx
 void	init_mlx(t_fractol *generate);
 void	open_screen(t_fractol *generate);
 void	new_image(t_fractol *generate);
-void 	init_fractal(t_fractol	*generate);
 void	image_to_window(t_fractol *generate);
 void	hooks(t_fractol *generate);
 
-// initialize parameters
-void	init_param(t_fractol *generate, char *argv);
-void	init_type(t_fractol *generate, char *argv);
-void	init_screen_settings(t_screen *screen);
-void	init_mods(t_mods *mods);
 
-// main
-void	put_pixel(void* param);
+// initialize parameters
+void	init_fractal_settings(t_fractol *generate, char **argv);
+void	init_color_type(t_fractol *generate, char *argv);
+void	reset_fractol_settings(t_fractol *generate);
+void	init_fractal_type(t_fractol *generate, char *argv);
+void	init_screen_settings(t_screen *screen);
+void	init_navigation(t_nav *mods);
+
+// utils
+void 	init_fractal(t_fractol	*generate);
+void 	error_message(void);
 
 #endif

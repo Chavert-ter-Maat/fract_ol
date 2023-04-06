@@ -6,7 +6,7 @@
 #    By: chaverttermaat <chaverttermaat@student.      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/17 11:27:38 by chavertterm   #+#    #+#                  #
-#    Updated: 2023/02/13 11:13:21 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/04/04 13:31:26 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,12 +60,12 @@ comp: # Compile and clean
 	$(MAKE) clean
 
 clean: # Clean generated files and test cache
-	/bin/$(RM) $(OBJ)
+	$(RM) $(OBJ)
 	@echo "$(YELLOW)ft_printf object files cleaned $(DEF_COLOR)"
 
 fclean: clean
-	/bin/$(RM) $(NAME)
-	@echo "$(CYAN) ft_printf object files and folders are cleaned $(DEF_COLOR)"
+	$(RM) $(NAME)
+	@echo "$(RED) ft_printf object files and folders are cleaned $(DEF_COLOR)"
 
 re: # Cleaned and rebuilt
 	$(MAKE) fclean

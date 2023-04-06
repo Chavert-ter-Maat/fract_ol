@@ -6,7 +6,7 @@
 #    By: chaverttermaat <chaverttermaat@student.      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/07 10:49:31 by chavertterm   #+#    #+#                  #
-#    Updated: 2023/04/03 17:13:20 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/04/06 13:27:37 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,13 +33,12 @@ MLX = ./MLX42/build/libmlx42.a
 # SOURCES
 SRC =	SRC/fractal_burning_ship.c \
 		SRC/fractal_mandelbrot.c \
-		SRC/coloring.c \
 		SRC/hook_mlx.c \
 		SRC/parameters.c \
-		SRC/fractals.c \
 		SRC/main.c \
 		SRC/hook_navigation.c \
 		SRC/hook_zoom.c \
+		SRC/utils.c \
 		
 		
 # OBJECTS
@@ -59,8 +58,8 @@ WHITE 		= \033[0;97m
 # RULES
 $(NAME): $(OBJ)
 	$(MAKE) -C ./MLX42/build
-	$(MAKE) -C ./libft
-	$(MAKE) -C ./libft/ft_printf
+	# $(MAKE) -C ./libft
+	# $(MAKE) -C ./libft/ft_printf
 	$(CC) $(LDFLAGS) $(OBJ) $(INCLUDES) $(MLX) $(LIBFT) $(PRINTF) $(CFLAGS) $(SANITIZE) -o $(NAME) 
 	@echo "$(GREEN) Fract-ol compiled $(DEF_COLOR)"
 
@@ -78,15 +77,18 @@ rebug: fclean
 	
 clean:
 	$(RM) $(OBJ)
-	$(MAKE) clean -C ./libft
-	$(MAKE) clean -C ./libft/ft_printf
+	# $(MAKE) clean -C ./libft
+	# $(MAKE) clean -C ./libft/ft_printf
 	@echo "$(YELLOW) Fract-ol object files cleaned $(DEF_COLOR)"
 
-fclean: clean
+fclean: 
+	$(RM) $(OBJ)
+	@echo "$(YELLOW) Fract-ol object files cleaned $(DEF_COLOR)"
 	$(RM) $(NAME)
-	$(MAKE) fclean -C ./libft
-	$(MAKE) fclean -C ./libft/ft_printf
-	@echo "$(BLUE) Fract-ol object files & executable cleaned $(DEF_COLOR)"
+	@echo "$(RED) Fract-ol object files and executable are cleaned $(DEF_COLOR)"
+	# $(MAKE) fclean -C ./libft
+	# $(MAKE) fclean -C ./libft/ft_printf
+	
 
 re: fclean all
 	$(RM) $(OBJ)

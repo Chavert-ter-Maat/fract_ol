@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/21 11:31:11 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/03 14:13:08 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/04 14:57:04 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void new_image(t_fractol *generate)
 
 void image_to_window(t_fractol *generate)
 {
-	if (mlx_image_to_window(generate->mlx, generate->image, 0, 0) == -1)
+	if (mlx_image_to_window(generate->mlx, generate->image, 0, 0) == FAILURE)
 	{
 		mlx_close_window(generate->mlx);
 		puts(mlx_strerror(mlx_errno));
@@ -56,9 +56,8 @@ void image_to_window(t_fractol *generate)
 
 void hooks(t_fractol *generate)
 {
-	// mlx_loop_hook(generate->mlx, itter_y, generate);
-	scroll_hook(generate->mods.x_offset, generate->mods.y_offset, generate);
-	mlx_loop_hook(generate->mlx, ft_hook, generate);
+	mlx_scroll_hook(generate->mlx, &my_scrollhook, generate);
+	mlx_loop_hook(generate->mlx, hook, generate);
 	mlx_loop(generate->mlx);
 	mlx_terminate(generate->mlx);
 }

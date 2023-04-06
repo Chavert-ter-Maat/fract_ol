@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 09:54:07 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/03 14:15:54 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/06 14:05:48 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@ int32_t main(int32_t argc, char **argv)
 {
 	t_fractol	generate;
 	
-	if (argc != 2)
+	if (argc != 3)
 	{
-		ft_printf(argv[0]);
-		ft_printf("input error");
+		error_message();
 		exit (EXIT_FAILURE);
 	}
-	init_param(&generate, argv[1]);
+	init_fractal_settings(&generate, argv);
 	init_mlx(&generate);
 	return (EXIT_SUCCESS);
 }

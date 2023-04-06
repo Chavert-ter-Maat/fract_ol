@@ -90,7 +90,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
-	@echo "$(YELLOW) ft_printf object files & folders are cleaned $(DEF_COLOR)"
+	@echo "$(RED) ft_printf object files & folders are cleaned $(DEF_COLOR)"
 
 re: fclean $(NAME)
 

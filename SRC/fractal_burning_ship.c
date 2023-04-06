@@ -19,10 +19,10 @@ static int	iterations(int iter, double real, double imag, t_fractol *generate)
 	z_real = 0.0;
 	z_imag = 0.0;
 	iter = 0;
-	while (iter < generate->mods.max_iter && (z_real + z_imag) <= 4.0)
+	while (iter < MAX_ITTER && (z_real + z_imag) <= 4.0)
 	{
-		next_z_imag = 2 * z_real * z_imag + imag;
-		next_z_real = z_real - z_imag + real;
+		next_z_imag = 2 * z_real * z_imag + imag + generate->nav.y_nav;
+		next_z_real = z_real - z_imag + real + generate->nav.x_nav;
 		z_real = next_z_real * next_z_real;
 		z_imag = next_z_imag * next_z_imag;
 		iter++;
@@ -53,10 +53,10 @@ static void	put_pixel_x(int y, t_fractol *generate)
 	iter = 0;
 	while (x < WIDTH)
 	{
-		c_real = generate->screen.min_x + x * generate->mods.x_offset;
-		c_imag = generate->screen.min_y + y * generate->mods.y_offset;
+		c_real = generate->screen.min_x + x * generate->nav.x_offset;
+		c_imag = generate->screen.min_y + y * generate->nav.y_offset;
 		iter = iterations(iter, c_real, c_imag, generate);
-		if (iter == generate->mods.max_iter)
+		if (iter == MAX_ITTER)
 			mlx_put_pixel(generate->image, x, y, 0xFFFFFFFF);
 		else 
 			mlx_put_pixel(generate->image, x, y, 0x00FFFFFF);
@@ -79,8 +79,8 @@ void	init_burningship(t_fractol *generate)
 
 	y = 0;
 	screen = generate->screen;
-	generate->mods.x_offset = (screen.max_x - screen.min_x) / WIDTH;
-	generate->mods.y_offset = (screen.max_y - screen.min_y) / HEIGHT;
+	generate->nav.x_offset = (screen.max_x - screen.min_x) / WIDTH;
+	generate->nav.y_offset = (screen.max_y - screen.min_y) / HEIGHT;
 	while (y < HEIGHT) 
 	{
 		put_pixel_x(y, generate);
