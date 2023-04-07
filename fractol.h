@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 11:23:20 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/06 14:07:46 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/07 18:27:12 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 # include <string.h>
 
 // defines
-# define WIDTH 		500
-# define HEIGHT		500
+# define WIDTH 		600
+# define HEIGHT		600
 # define CORRECT	0
 # define FAILURE	-1
-# define MAX_ITTER	100
+# define MAX_ITTER	150
 
 typedef enum e_choice
 {
@@ -38,23 +38,25 @@ typedef enum e_choice
 	BURNINGSHIP,
 }	t_choice;
 
-typedef enum e_color
+typedef struct s_colors
 {
-	RAINBOW,
-}	t_color;
+	int	r;
+	int	b;
+	int	g;
+	int	i;
+}	t_colors;
 
 // structures
 typedef struct s_navigation
 {
 	int		width;
 	int		height;
-	double	zoom;
+	double	zoom_factor;
 	double	x_offset;
 	double	y_offset;
 	double	zoom_in;
 	double	zoom_out;
 	double	nav_step;
-	double	zoom_multiplier;
 	double	y_nav;
 	double	x_nav;
 }	t_nav;
@@ -73,6 +75,7 @@ typedef struct 	s_fractol
 	mlx_t		*mlx;
 	t_screen	screen;
 	t_nav		nav;
+	t_colors	colors;
 	int			choice;
 	int			color;
 	char		**argv;
@@ -103,10 +106,12 @@ void	init_color_type(t_fractol *generate, char *argv);
 void	reset_fractol_settings(t_fractol *generate);
 void	init_fractal_type(t_fractol *generate, char *argv);
 void	init_screen_settings(t_screen *screen);
-void	init_navigation(t_nav *mods);
+void	init_navigation(t_fractol *generate);
+void	init_colors(t_colors *colors, char *argv);
 
 // utils
 void 	init_fractal(t_fractol	*generate);
 void 	error_message(void);
+void	put_inscription(t_fractol *generate);
 
 #endif

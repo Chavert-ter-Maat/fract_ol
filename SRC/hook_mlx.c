@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/21 11:31:11 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/04 14:57:04 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/07 16:03:28 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void image_to_window(t_fractol *generate)
 
 void hooks(t_fractol *generate)
 {
+	put_inscription(generate); 
 	mlx_scroll_hook(generate->mlx, &my_scrollhook, generate);
 	mlx_loop_hook(generate->mlx, hook, generate);
 	mlx_loop(generate->mlx);
