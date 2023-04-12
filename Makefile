@@ -6,7 +6,7 @@
 #    By: chaverttermaat <chaverttermaat@student.      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/07 10:49:31 by chavertterm   #+#    #+#                  #
-#    Updated: 2023/04/06 13:27:37 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/04/12 13:19:10 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,13 +31,15 @@ LIBFT = ./libft/libft.a
 MLX = ./MLX42/build/libmlx42.a
 
 # SOURCES
-SRC =	SRC/fractal_burning_ship.c \
+SRC =	SRC/colors.c \
+		SRC/fractal_burning_ship.c \
 		SRC/fractal_mandelbrot.c \
+		SRC/fractal_julia.c \
 		SRC/hook_mlx.c \
-		SRC/parameters.c \
+		SRC/hook_keys.c \
+		SRC/hook_scroll.c \
+		SRC/init_parameters.c \
 		SRC/main.c \
-		SRC/hook_navigation.c \
-		SRC/hook_zoom.c \
 		SRC/utils.c \
 		
 		
