@@ -1,27 +1,27 @@
 #include "../fractol.h"
 
-static int	iterations(int iter, double real, double imag, t_fractol *generate) 
+static int iterations(int iter, double real, double imag) 
 {
-	double	z_real;
-	double	z_imag;
-	double	next_z_real;
-	double	next_z_imag;
+	double z_real;
+	double z_imag;
+	double next_z_real;
+	double next_z_imag;
 	
-	z_real = 0.0;
-	z_imag = 0.0;
+	z_real = real;
+	z_imag = imag;
 	iter = 0;
-	while (iter < MAX_ITTER && (z_real + z_imag) <= 4.0)
+	while (iter < MAX_ITTER && (z_real * z_real + z_imag * z_imag) <= 4.0)
 	{
-		next_z_imag = 2 * z_real * z_imag + imag + generate->nav.y_nav;
-		next_z_real = z_real - z_imag + real + generate->nav.x_nav;
-		z_real = next_z_real * next_z_real;
-		z_imag = next_z_imag * next_z_imag;
+		next_z_imag = fabs(2 * z_real * z_imag) + imag;
+		next_z_real = z_real * z_real - z_imag * z_imag + real;
+		z_real = next_z_real;
+		z_imag = next_z_imag;
 		iter++;
 	}
 	return (iter);
 }
 
-static void	put_pixel_x(int y, t_fractol *generate) 
+static void	put_pixel_x(int y, t_fractol *gen) 
 {
 	double	c_real;
 	double	c_imag;
@@ -32,15 +32,15 @@ static void	put_pixel_x(int y, t_fractol *generate)
 	iter = 0;
 	while (x < WIDTH)
 	{
-		c_real = generate->screen.min_x + x * generate->nav.x_offset;
-		c_imag = generate->screen.min_y + y * generate->nav.y_offset;
-		iter = iterations(iter, c_real, c_imag, generate);
-		get_color(generate, x, y, iter);
+		c_real = gen->screen.min_x + x * gen->nav.x_offset + gen->nav.x_nav;
+		c_imag = gen->screen.min_y + y * gen->nav.y_offset + gen->nav.y_nav;
+		iter = iterations(iter, c_real, c_imag);
+		get_color(gen, x, y, iter);
 		x++;
 	}
 }
 
-void	init_burningship(t_fractol *generate) 
+void	burningship(t_fractol *generate) 
 {
 	int			y;	
 	t_screen	screen;

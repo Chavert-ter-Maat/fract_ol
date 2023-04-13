@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/06 11:23:20 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/12 14:57:57 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/13 15:18:34 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@
 # include "./MLX42/include/MLX42/MLX42.h"
 
 // defines
-# define WIDTH 		500
-# define HEIGHT		500
+# define WIDTH 		600
+# define HEIGHT		600
 # define CORRECT	0
 # define FAILURE	-1
+# define false		0
 # define MAX_ITTER	100
 # define NUM_LAYERS 7
 # define LAYER_RANGE (MAX_ITTER / NUM_LAYERS)
@@ -37,15 +38,16 @@ typedef enum e_choice
 	MANDELBROT,
 	JULIA,
 	BURNINGSHIP,
+	NORMAL,
+	RAINBOW,
+	TRIPPY,
 }	t_choice;
 
 typedef struct s_colors
 {
+	int	color_type;
 	int	red;
-	int	blue;
-	int	green;
 	int	black;
-	int	white;
 	int	color_set;
 	int	color_set1;
 	int	color_set2;
@@ -94,8 +96,8 @@ typedef struct 	s_fractol
 } 	t_fractol;
 
 // colors
-void	get_color(t_fractol *generate, int x, int y, int iter);
-void	ft_randomize(t_fractol *generate);
+void		get_color(t_fractol *generate, int x, int y, int iter);
+uint32_t	ft_randomize(t_fractol *generate);
 
 // hook_keys
 void	hook_keys(void* param);
@@ -109,9 +111,9 @@ void	hook_scroll(double x_offset, double y_offset, void *param);
 
 
 // fractals
-void	init_mandelbrot(t_fractol *generate);
-void	init_burningship(t_fractol *generate);
-void	init_julia(t_fractol *generate) ;
+void	mandelbrot(t_fractol *generate);
+void	burningship(t_fractol *generate);
+void	julia(t_fractol *generate) ;
 
 
 // hook_mlx
@@ -124,18 +126,22 @@ void	hooks(t_fractol *generate);
 
 // initialize_parameters
 void	init_fractal_settings(t_fractol *generate, char **argv);
-void	init_color_type(t_fractol *generate, char *argv);
+void	init_color_type(t_colors *colors, char *argv);
 void	reset_fractol_settings(t_fractol *generate);
 void	init_fractal_type(t_fractol *generate, char *argv);
-void	init_screen_settings(t_screen *screen);
+void	init_screen_settings_mandelbrot(t_screen *screen);
 void	init_screen_settings_julia(t_screen *screen);
+void	init_screen_settings_burningship(t_screen *screen);
 void	init_navigation_mandelbrot(t_fractol *generate);
 void	init_navigation_julia(t_fractol *generate);
 void	init_navigation_burningship(t_fractol *generate);
-void	init_colors(t_colors *colors, char *argv);
+void	init_trippy(t_colors *colors);
+void	init_rainbow(t_colors *colors);
+void	init_normal(t_colors *colors);
+// void	init_colors(t_colors *colors, char *argv);
 
 // utils
-void 	init_fractal(t_fractol	*generate);
+void 	update_fractal(t_fractol *generate);
 void 	error_message(void);
 void	put_inscription(t_fractol *generate);
 

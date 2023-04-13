@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/22 10:31:19 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/12 14:01:20 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/13 14:49:00 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	init_fractal_settings(t_fractol *generate, char **argv)
 {
 	ft_bzero(generate, sizeof(*generate));
 	init_fractal_type(generate, argv[1]);
-	init_screen_settings(&generate->screen);
+	init_color_type(&generate->colors, argv[2]);
 	if (generate->fractal_type == MANDELBROT)
 	{
 		init_navigation_mandelbrot(generate);
-		init_screen_settings(&generate->screen);
+		init_screen_settings_mandelbrot(&generate->screen);
 	}
 	else if (generate->fractal_type == JULIA)
 	{
@@ -30,9 +30,8 @@ void	init_fractal_settings(t_fractol *generate, char **argv)
 	else if (generate->fractal_type == BURNINGSHIP)
 	{
 		init_navigation_burningship(generate);
-		init_screen_settings(&generate->screen);
+		init_screen_settings_burningship(&generate->screen);
 	}
-	init_colors(&generate->colors, argv[2]);
 }
 
 void	reset_fractol_settings(t_fractol *generate)
@@ -40,7 +39,7 @@ void	reset_fractol_settings(t_fractol *generate)
 	if (generate->fractal_type == MANDELBROT)
 	{
 		init_navigation_mandelbrot(generate);
-		init_screen_settings(&generate->screen);
+		init_screen_settings_mandelbrot(&generate->screen);
 	}
 	else if (generate->fractal_type == JULIA)
 	{
@@ -50,7 +49,7 @@ void	reset_fractol_settings(t_fractol *generate)
 	else if (generate->fractal_type == BURNINGSHIP)
 	{
 		init_navigation_burningship(generate);
-		init_screen_settings(&generate->screen);
+		init_screen_settings_burningship(&generate->screen);
 	}
 }
 
@@ -64,12 +63,38 @@ void	init_fractal_type(t_fractol *generate, char *argv)
 		generate->fractal_type = BURNINGSHIP;
 	else
 	{
-		ft_printf("input error!");
+		error_message();
 		exit (EXIT_FAILURE);
 	}
 }
 
-void	init_screen_settings(t_screen *screen)
+void	init_color_type(t_colors *colors, char *argv)
+{
+	ft_bzero(colors, sizeof(colors));
+	colors->black = 0x00000FF;
+	if (ft_strncmp(argv, "normal", 7) == CORRECT)
+	{
+		colors->color_type = NORMAL;
+		init_normal(colors);
+	}
+	else if (ft_strncmp(argv, "rainbow", 8) == CORRECT)
+	{
+		colors->color_type = RAINBOW;
+		init_rainbow(colors);
+	}
+	else if (ft_strncmp(argv, "trippy", 7) == CORRECT)
+	{
+		colors->color_type = TRIPPY;
+		init_trippy(colors);
+	}
+	else
+	{
+		error_message();
+		exit (EXIT_FAILURE);
+	}
+}
+
+void	init_screen_settings_mandelbrot(t_screen *screen)
 {
 	ft_bzero(screen, sizeof(*screen));
 	screen->max_x = 1.0;
@@ -85,6 +110,15 @@ void	init_screen_settings_julia(t_screen *screen)
 	screen->min_x = -2.0;
 	screen->max_y = 1.5;
 	screen->min_y = -1.5;
+}
+
+void	init_screen_settings_burningship(t_screen *screen)
+{
+	ft_bzero(screen, sizeof(*screen));
+	screen->max_x = 1.5;
+	screen->min_x = -3.0;
+	screen->max_y = 1.5;
+	screen->min_y = -2;
 }
 
 void	init_navigation_mandelbrot(t_fractol *generate)
@@ -122,52 +156,33 @@ void	init_navigation_burningship(t_fractol *generate)
 	generate->nav.y_nav = 0.0;
 }
 
-static void init_red(t_colors *colors)
+void init_normal(t_colors *colors)
 {
-colors->color_set1 = 0xFF6969FF; // pastel red
-colors->color_set2 = 0xFFB6C1FF; // light pink/red
-colors->color_set3 = 0xCD5C5CFF; // dark red
-colors->color_set4 = 0xDC143CFF; // crimson red
+    colors->color_set1 = 0xF5DEB3FF; // wheat
+    colors->color_set2 = 0xE6E6FAFF; // lavender
+    colors->color_set3 = 0xD2B48CFF; // tan
+    colors->color_set4 = 0xFAEBD7FF; // antique white
+    colors->color_set5 = 0xCDCDCDFF; // light gray
+    colors->color_set6 = 0xFFF8DCFF; // cornsilk
 }
 
-static void init_blue(t_colors *colors)
+
+void init_rainbow(t_colors *colors)
 {
-colors->color_set1 = 0x6495EDFF; // cornflower blue
-colors->color_set2 = 0xADD8E6FF; // light blue
-colors->color_set3 = 0x4169E1FF; // royal blue
-colors->color_set4 = 0x0000CDFF; // medium blue
+	colors->color_set1 = 0xFFC300FF; // yellow
+	colors->color_set2 = 0xFF5733FF; // orange
+	colors->color_set3 = 0xFFC300FF; // yellow
+	colors->color_set4 = 0xC70039FF; // red
+	colors->color_set5 = 0x900C3FFF; // purple
+	colors->color_set6 = 0x00A8C6FF; // blue
 }
 
-static void init_green(t_colors *colors)
+void	init_trippy(t_colors *colors)
 {
-colors->color_set1 = 0x228B22FF; // forest green
-colors->color_set2 = 0x32CD32FF; // lime green
-colors->color_set3 = 0x7FFF00FF; // chartreuse
-colors->color_set4 = 0x006400FF; // dark green
-}
-
-static void init_rainbow(t_colors *colors)
-{
-colors->color_set1 = 0xFFC300FF; // yellow
-colors->color_set2 = 0xFF5733FF; // orange
-colors->color_set3 = 0xFFC300FF; // yellow
-colors->color_set4 = 0xC70039FF; // red
-colors->color_set5 = 0x900C3FFF; // purple
-colors->color_set6 = 0x00A8C6FF; // blue
-colors->color_set7 = 0x1E8449FF; // green
-}
-
-void	init_colors(t_colors *colors, char *argv)
-{
-	ft_bzero(colors, sizeof(colors));
-	colors->black = 0x8888800;
-	colors->white = 0xFFFFFFF;
-	if (ft_strncmp(argv, "red", 3) == CORRECT)
-		init_red(colors);
-	else if (ft_strncmp(argv, "green", 6) == CORRECT)
-		init_green(colors);
-	else if (ft_strncmp(argv, "blue", 5) == CORRECT)
-		init_blue(colors);
-	else if (ft_strncmp(argv, "rainbow", 8) == CORRECT)
-		init_rainbow(colors);
+	colors->color_set1 = colors->black;
+	colors->color_set2 = colors->black;
+	colors->color_set3 = colors->black;
+	colors->color_set4 = colors->black;
+	colors->color_set5 = colors->black;
+	colors->color_set6 = colors->black;
 }

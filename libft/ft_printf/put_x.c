@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_putx.c                                          :+:    :+:            */
+/*   put_x.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/21 15:59:41 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/03 10:01:24 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/03/06 17:13:22 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_getlen(unsigned int number)
+int	get_lenght_hex(unsigned int number)
 {
-	int	string_lenght;
+	int	count_digits;
 
-	string_lenght = 0;
+	count_digits = 0;
 	if (number == 0)
 		return (1);
 	while (number != 0)
 	{
 		number /= 16;
-		string_lenght++;
+		count_digits++;
 	}
-	return (string_lenght);
+	return (count_digits);
 }
 
 static char	*ft_itoah(unsigned int x, const char format)
@@ -37,7 +37,7 @@ static char	*ft_itoah(unsigned int x, const char format)
 		hex_string = "0123456789abcdef";
 	if (format == 'X')
 		hex_string = "0123456789ABCDEF";
-	string_lenght = ft_getlen(x);
+	string_lenght = get_lenght_hex(x);
 	string = malloc((string_lenght + 1) * sizeof(char));
 	if (!string)
 		return (0);
@@ -53,25 +53,19 @@ static char	*ft_itoah(unsigned int x, const char format)
 	return (string);
 }
 
-int	ft_putx(unsigned int x, const char format)
+int	put_x(unsigned int x, const char format)
 {
 	char	*string;
 	int		lenght;
 
-	lenght = ft_getlen(x);
+	lenght = get_lenght(x);
 	string = ft_itoah(x, format);
 	if (lenght == 0)
 		return (0);
 	if (!string)
 		return (-1);
-	if (ft_printstr(string) == -1)
+	if (print_string(string) == -1)
 		return (free(string), -1);
 	free (string);
 	return (lenght);
 }
-
-/*int	main(void)
- {
- 	printf("\x%i = ft\x", ft_putx(-5, 'X'));
- 	printf("\n%i = original\n", printf("%X", -5));
- }*/

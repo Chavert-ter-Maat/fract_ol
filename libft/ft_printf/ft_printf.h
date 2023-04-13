@@ -6,7 +6,7 @@
 /*   By: chaverttermaat <chaverttermaat@student.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/17 12:31:46 by chavertterm   #+#    #+#                 */
-/*   Updated: 2023/03/03 10:28:36 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/03/06 14:44:29 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,16 @@
 # include <stdint.h>
 
 // FUNCTIONS
-int	ft_printf(const char *str, ...);
-int	ft_printstr(char *s);
-int	ft_putc(int c);
-int	ft_putid(int n);
-int	ft_putp(uintptr_t n);
-int	ft_putperc(void);
-int	ft_puts(char *s);
-int	ft_putu(unsigned int n);
-int	ft_putx(unsigned int n, const char format);
+int	ft_printf(const char *string, ...);
+int	get_lenght(int number);
+int	get_lenght_hex(unsigned int number);
+int	print_string(char *string);
+int	put_perc(void);
+int	put_c(int character);
+int	put_id(int number);
+int	put_p(uintptr_t pointer);
+int	put_s(char *string);
+int	put_u(unsigned int u);
+int	put_x(unsigned int x, const char format);
 
 #endif

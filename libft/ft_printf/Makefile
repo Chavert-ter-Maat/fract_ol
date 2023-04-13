@@ -6,7 +6,7 @@
 #    By: chaverttermaat <chaverttermaat@student.      +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/17 11:27:38 by chavertterm   #+#    #+#                  #
-#    Updated: 2023/04/04 13:31:26 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/04/13 14:35:24 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,13 @@ RM 			= rm -f
 
 # SOURCES
 SRC 		= 	ft_printf.c \
-				ft_printstr.c \
-				ft_putc.c \
-				ft_putid.c \
-				ft_putp.c \
-				ft_putperc.c \
-				ft_puts.c \
-				ft_putu.c \
-				ft_putx.c \
+				put_c.c \
+				put_id.c \
+				put_p.c \
+				put_perc.c \
+				put_s.c \
+				put_u.c \
+				put_x.c \
 
 # OBJECTS
 OBJ 		= $(SRC:.c=.o)

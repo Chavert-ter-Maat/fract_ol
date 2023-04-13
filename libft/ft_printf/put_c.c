@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstsize.c                                       :+:    :+:            */
+/*   put_c.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/02/02 13:18:45 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/02/02 15:16:57 by cter-maa      ########   odam.nl         */
+/*   Created: 2022/11/19 12:31:26 by cter-maa      #+#    #+#                 */
+/*   Updated: 2023/03/06 14:02:21 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* ************************************************************************** */
-/* Counts the number of nodes in a list.									  */
-/* ************************************************************************** */
+#include "ft_printf.h"
 
-#include "libft.h"
-
-int	ft_lstsize(t_list *lst)
+int	put_c(int character)
 {
-	int		amount;
-
-	amount = 0;
-	while(lst)
-	{
-		amount++;
-		lst = lst->next;
-	}
-	return (amount);
+	return (write(1, &character, 1));
 }

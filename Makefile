@@ -6,14 +6,14 @@
 #    By: chaverttermaat <chaverttermaat@student.      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/07 10:49:31 by chavertterm   #+#    #+#                  #
-#    Updated: 2023/04/12 13:19:10 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/04/13 14:52:16 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 # VARIABLES
 NAME 	= fractol
 CC 		= gcc
-CFLAGS 	= -Wall -Wextra -Werror
+#CFLAGS 	= -Wall -Wextra -Werror
 ifdef DEBUG
 	CFLAGS += -g
 endif
@@ -60,8 +60,8 @@ WHITE 		= \033[0;97m
 # RULES
 $(NAME): $(OBJ)
 	$(MAKE) -C ./MLX42/build
-	# $(MAKE) -C ./libft
-	# $(MAKE) -C ./libft/ft_printf
+	$(MAKE) -C ./libft
+	$(MAKE) -C ./libft/ft_printf
 	$(CC) $(LDFLAGS) $(OBJ) $(INCLUDES) $(MLX) $(LIBFT) $(PRINTF) $(CFLAGS) $(SANITIZE) -o $(NAME) 
 	@echo "$(GREEN) Fract-ol compiled $(DEF_COLOR)"
 
@@ -79,8 +79,8 @@ rebug: fclean
 	
 clean:
 	$(RM) $(OBJ)
-	# $(MAKE) clean -C ./libft
-	# $(MAKE) clean -C ./libft/ft_printf
+	$(MAKE) clean -C ./libft
+	$(MAKE) clean -C ./libft/ft_printf
 	@echo "$(YELLOW) Fract-ol object files cleaned $(DEF_COLOR)"
 
 fclean: 
@@ -88,8 +88,8 @@ fclean:
 	@echo "$(YELLOW) Fract-ol object files cleaned $(DEF_COLOR)"
 	$(RM) $(NAME)
 	@echo "$(RED) Fract-ol object files and executable are cleaned $(DEF_COLOR)"
-	# $(MAKE) fclean -C ./libft
-	# $(MAKE) fclean -C ./libft/ft_printf
+	$(MAKE) fclean -C ./libft
+	$(MAKE) fclean -C ./libft/ft_printf
 	
 
 re: fclean all

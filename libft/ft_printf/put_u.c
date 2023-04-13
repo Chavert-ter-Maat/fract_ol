@@ -1,41 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_putu.c                                          :+:    :+:            */
+/*   put_u.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/19 15:44:10 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/02/13 11:00:13 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/03/06 14:43:54 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static int	ft_getlen(unsigned int number)
-{
-	int	string_lenght;
-
-	string_lenght = 0;
-	if (number == 0)
-		return (1);
-	while (number != 0)
-	{
-		string_lenght++;
-		number = number / 10;
-	}
-	return (string_lenght);
-}
 
 static char	*ft_itoa(unsigned int number)
 {
 	unsigned int	string_lenght;
 	char			*string;
 
-	string_lenght = ft_getlen(number);
+	string_lenght = get_lenght(number);
 	string = malloc((string_lenght + 1) * sizeof(char));
 	if (!string)
-		return (NULL);
+		return (0);
 	if (number == 0)
 		string[0] = '0';
 	string[string_lenght] = '\0';
@@ -53,15 +38,15 @@ static char	*ft_itoa(unsigned int number)
 	return (string);
 }
 
-int	ft_putu(unsigned int u)
+int	put_u(unsigned int u)
 {
 	char	*string;
 
 	string = ft_itoa(u);
 	if (!string)
 		return (-1);
-	if (ft_printstr(string) == -1)
+	if (print_string(string) == -1)
 		return (free(string), -1);
 	free (string);
-	return (ft_getlen(u));
+	return (get_lenght(u));
 }

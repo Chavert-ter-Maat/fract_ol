@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/21 11:32:08 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/10 16:23:22 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/13 14:24:48 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,32 +35,34 @@ void	hook_navigation(t_fractol *generate)
 		generate->nav.x_nav -= generate->nav.nav_step;
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_RIGHT))
 		generate->nav.x_nav += generate->nav.nav_step;
-	init_fractal(generate);
+	update_fractal(generate);
 }
 
 void	hook_zoom(t_fractol *generate)
 {
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_W))
 		zoom_fractal(generate, 1);
-	if (mlx_is_key_down(generate->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(generate->mlx, MLX_KEY_S))
 		zoom_fractal(generate, - 1);
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_A))
-		generate->nav.nav_step *= 4;
+		generate->nav.nav_step *= 3;
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_D))
-		generate->nav.nav_step /= 4;
+		generate->nav.nav_step /= 3;
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_R))
 		reset_fractol_settings(generate);
-	init_fractal(generate);
+	update_fractal(generate);
 }
 
 void	hook_colors(t_fractol *generate)
 {
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_Q))
-		generate->colors.color_set += 0x7FB3DEFF;
-	init_fractal(generate);
+	{
+		generate->colors.color_set1 += 0x7FB3DEFF; // yellow
+		generate->colors.color_set2 += 0x7FB3DEFF; // orange
+		generate->colors.color_set3 += 0x7FB3DEFF; // yellow
+		generate->colors.color_set4 += 0x7FB3DEFF; // red
+		generate->colors.color_set5 += 0x7FB3DEFF; // purple
+		generate->colors.color_set6 += 0x7FB3DEFF; // blue
+	}
+	update_fractal(generate);
 }
-
-
-
-
-

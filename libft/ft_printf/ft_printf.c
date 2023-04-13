@@ -6,31 +6,31 @@
 /*   By: chaverttermaat <chaverttermaat@student.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/17 13:58:06 by chavertterm   #+#    #+#                 */
-/*   Updated: 2023/02/13 11:12:02 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/03/06 14:43:08 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_format(va_list argument_list, const char format)
+static int	format(va_list argument_list, const char format)
 {
 	int	count;
 
 	count = 0;
 	if (format == 'c')
-		count += ft_putc(va_arg(argument_list, int));
+		count += put_c(va_arg(argument_list, int));
 	if (format == 'd' || format == 'i')
-		count += ft_putid(va_arg(argument_list, int));
+		count += put_id(va_arg(argument_list, int));
 	if (format == 's')
-		count += ft_puts(va_arg(argument_list, char *));
+		count += put_s(va_arg(argument_list, char *));
 	if (format == 'u')
-		count += ft_putu(va_arg(argument_list, unsigned int));
+		count += put_u(va_arg(argument_list, unsigned int));
 	if (format == 'x' || format == 'X')
-		count += ft_putx(va_arg(argument_list, unsigned int), format);
+		count += put_x(va_arg(argument_list, unsigned int), format);
 	if (format == 'p')
-		count += ft_putp(va_arg(argument_list, uintptr_t));
+		count += put_p(va_arg(argument_list, uintptr_t));
 	if (format == '%')
-		count += ft_putperc();
+		count += put_perc();
 	return (count);
 }
 
@@ -48,11 +48,11 @@ int	ft_printf(const char *string, ...)
 	{	
 		if (string[index] == '%' && string[index + 1] != '\0')
 		{
-			protect = ft_format(argument_list, string[index + 1]);
+			protect = format(argument_list, string[index + 1]);
 			index++;
 		}
 		else
-			protect = ft_putc(string[index]);
+			protect = put_c(string[index]);
 		if (protect == -1)
 			return (-1);
 		count += protect;

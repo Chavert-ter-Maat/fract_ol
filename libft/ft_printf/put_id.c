@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_putid.c                                         :+:    :+:            */
+/*   put_id.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/19 12:28:17 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/03 10:29:04 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/03/06 17:13:00 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_getlen(int number)
+int	get_lenght(int number)
 {
-	int	string_lenght;
+	int	count_digits;
 
-	string_lenght = 0;
+	count_digits = 0;
 	if (number == 0)
 		return (1);
 	if (number < 0)
-		string_lenght++;
+		count_digits++;
 	while (number != 0)
 	{
 		number /= 10;
-		string_lenght++;
+		count_digits++;
 	}
-	return (string_lenght);
+	return (count_digits);
 }
 
 static char	*ft_itoa(int number)
@@ -36,7 +36,7 @@ static char	*ft_itoa(int number)
 	char		*string;
 
 	long_number = (long int)number;
-	string_lenght = ft_getlen(long_number);
+	string_lenght = get_lenght(long_number);
 	string = malloc((string_lenght + 1) * sizeof(char));
 	if (!string)
 		return (0);
@@ -57,15 +57,15 @@ static char	*ft_itoa(int number)
 	return (string);
 }
 
-int	ft_putid(int number)
+int	put_id(int number)
 {
 	char	*string;
 
 	string = ft_itoa(number);
 	if (!string)
 		return (-1);
-	if (ft_printstr(string) == -1)
+	if (print_string(string) == -1)
 		return (free(string), -1);
 	free (string);
-	return (ft_getlen(number));
+	return (get_lenght(number));
 }

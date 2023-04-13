@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_putp.c                                          :+:    :+:            */
+/*   put_p.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/22 15:20:31 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/03/03 10:05:27 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/13 15:13:01 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_strlen(char *string)
+static int	string_lenght(char *string)
 {
 	int	i;
 
@@ -26,21 +26,6 @@ static int	ft_strlen(char *string)
 	return (i);
 }
 
-static int	ft_getlen(uintptr_t number)
-{
-	int	string_lenght;
-
-	string_lenght = 0;
-	if (number == 0)
-		return (1);
-	while (number != 0)
-	{
-		number /= 16;
-		string_lenght++;
-	}
-	return (string_lenght);
-}
-
 static char	*ft_itoah(uintptr_t x)
 {
 	int		string_lenght;
@@ -48,7 +33,7 @@ static char	*ft_itoah(uintptr_t x)
 	char	*hex_string;	
 
 	hex_string = "0123456789abcdef";
-	string_lenght = ft_getlen(x);
+	string_lenght = get_lenght_hex(x);
 	string = malloc((string_lenght + 3) * sizeof(char));
 	if (!string)
 		return (0);
@@ -64,16 +49,16 @@ static char	*ft_itoah(uintptr_t x)
 	return (string);
 }
 
-int	ft_putp(uintptr_t pointer)
+int	put_p(uintptr_t pointer)
 {
 	char	*string;
 	int		lenght;
 
 	string = ft_itoah(pointer);
+	lenght = string_lenght(string);
 	if (!string)
 		return (-1);
-	lenght = ft_strlen(string);
-	if (ft_printstr(string) == -1)
+	if (print_string(string) == -1)
 		return (free(string), -1);
 	free (string);
 	return (lenght);

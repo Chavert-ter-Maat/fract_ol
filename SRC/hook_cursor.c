@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_putperc.c                                       :+:    :+:            */
+/*   hook_cursor.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/23 11:25:00 by cter-maa      #+#    #+#                 */
-/*   Updated: 2022/11/29 11:25:25 by cter-maa      ########   odam.nl         */
+/*   Created: 2023/04/13 11:54:27 by cter-maa      #+#    #+#                 */
+/*   Updated: 2023/04/13 13:37:05 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../fractol.h"
 
-int	ft_putperc(void)
+void	mouse_hook(void *param)
 {
-	return (write(1, "%", 1));
+	t_fractol 		*generate;
+	
+	generate = param;
+	
+	mlx_g
 }
+	
+	

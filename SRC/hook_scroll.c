@@ -6,11 +6,12 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/03 12:47:00 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/12 13:10:22 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/13 15:08:38 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
+
 void zoom_in(t_fractol *generate)
 {
 	if (generate->nav.zoom_in != 1)
@@ -36,16 +37,10 @@ void zoom_out(t_fractol *generate)
 void	zoom_fractal(t_fractol *generate, double y_offset)
 {
 	if (y_offset > 0)
-	{
 		zoom_in(generate);
-		generate->nav.nav_step /= 1.35;
-	}
 	else if (y_offset < 0)
-	{
 		zoom_out(generate);
-		generate->nav.nav_step *= 1.35;
-	}
-	init_fractal(generate);
+	update_fractal(generate);
 }
 
 static void	scroll_julia(t_fractol *generate, double y_offset)
@@ -54,7 +49,7 @@ static void	scroll_julia(t_fractol *generate, double y_offset)
 		generate->nav.nav_step += 0.01;
 	else if (y_offset < 0)
 		generate->nav.nav_step -= 0.01;
-	init_fractal(generate);
+	update_fractal(generate);
 }
 
 void	hook_scroll(double x_offset, double y_offset, void *param)
@@ -63,7 +58,8 @@ void	hook_scroll(double x_offset, double y_offset, void *param)
 
 		generate = param;
 		(void) x_offset;
-		if (generate->fractal_type == MANDELBROT)
+		if (generate->fractal_type == MANDELBROT 
+			|| generate->fractal_type == BURNINGSHIP)
 			zoom_fractal(generate, y_offset);
 		else if (generate->fractal_type == JULIA)
 			scroll_julia(generate, y_offset);

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_putc.c                                          :+:    :+:            */
+/*   put_%.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/19 12:31:26 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/02/13 10:54:06 by cter-maa      ########   odam.nl         */
+/*   Created: 2022/11/23 11:25:00 by cter-maa      #+#    #+#                 */
+/*   Updated: 2023/03/06 14:02:35 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putc(int character)
+int	put_perc(void)
 {
-	return (write(1, &character, 1));
+	return (write(1, "%", 1));
 }
