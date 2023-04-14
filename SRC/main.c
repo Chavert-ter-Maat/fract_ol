@@ -6,16 +6,16 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 09:54:07 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/13 15:01:01 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/14 14:03:10 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
-	
-int32_t main(int32_t argc, char **argv)
+
+int32_t	main(int32_t argc, char **argv)
 {
 	t_fractol	generate;
-	
+
 	if (argc != 3)
 	{
 		error_message();

@@ -6,13 +6,13 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/28 14:14:39 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/13 14:41:43 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/14 15:54:18 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-void 	update_fractal(t_fractol *generate)
+void	update_fractal(t_fractol *generate)
 {
 	if (generate->fractal_type == MANDELBROT)
 		mandelbrot(generate);
@@ -36,15 +36,13 @@ void	put_inscription_mandelbrot_burningship(t_fractol *generate)
 void	put_inscription_julia(t_fractol *generate)
 {
 	mlx_put_string(generate->mlx, "scroll to change julia", 10, 10);
-	mlx_put_string(generate->mlx, "'w' = zoom in", 10, 30);
-	mlx_put_string(generate->mlx, "'s' = zoom out", 10, 50);
-	mlx_put_string(generate->mlx, "'r' = reset fractal", 10, 70);
-	mlx_put_string(generate->mlx, "'q' = shift colors", 10, 90);
+	mlx_put_string(generate->mlx, "'r' = reset fractal", 10, 30);
+	mlx_put_string(generate->mlx, "'q' = shift colors", 10, 50);
 }
 
 void	put_inscription(t_fractol *generate)
 {
-	if (generate->fractal_type == MANDELBROT 
+	if (generate->fractal_type == MANDELBROT
 		|| generate->fractal_type == BURNINGSHIP)
 		put_inscription_mandelbrot_burningship(generate);
 	else

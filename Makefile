@@ -6,14 +6,14 @@
 #    By: chaverttermaat <chaverttermaat@student.      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/07 10:49:31 by chavertterm   #+#    #+#                  #
-#    Updated: 2023/04/13 14:52:16 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/04/14 14:04:44 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 # VARIABLES
 NAME 	= fractol
 CC 		= gcc
-#CFLAGS 	= -Wall -Wextra -Werror
+CFLAGS 	= -Wall -Wextra -Werror
 ifdef DEBUG
 	CFLAGS += -g
 endif
@@ -38,11 +38,13 @@ SRC =	SRC/colors.c \
 		SRC/hook_mlx.c \
 		SRC/hook_keys.c \
 		SRC/hook_scroll.c \
-		SRC/init_parameters.c \
+		SRC/init_colors.c \
+		SRC/init_fractal.c \
+		SRC/init_screen.c \
+		SRC/init_navigation.c \
 		SRC/main.c \
 		SRC/utils.c \
-		
-		
+			
 # OBJECTS
 OBJ			= $(SRC:.c=.o)
 
@@ -90,7 +92,6 @@ fclean:
 	@echo "$(RED) Fract-ol object files and executable are cleaned $(DEF_COLOR)"
 	$(MAKE) fclean -C ./libft
 	$(MAKE) fclean -C ./libft/ft_printf
-	
 
 re: fclean all
 	$(RM) $(OBJ)

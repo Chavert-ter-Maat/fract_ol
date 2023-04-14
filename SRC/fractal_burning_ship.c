@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   fractal_burning_ship.c                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/04/14 13:16:24 by cter-maa      #+#    #+#                 */
+/*   Updated: 2023/04/14 13:16:58 by cter-maa      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../fractol.h"
 
-static int iterations(int iter, double real, double imag) 
+static int	iterations(int iter, double real, double imag)
 {
-	double z_real;
-	double z_imag;
-	double next_z_real;
-	double next_z_imag;
-	
+	double	z_real;
+	double	z_imag;
+	double	next_z_real;
+	double	next_z_imag;
+
 	z_real = real;
 	z_imag = imag;
 	iter = 0;
@@ -21,7 +33,7 @@ static int iterations(int iter, double real, double imag)
 	return (iter);
 }
 
-static void	put_pixel_x(int y, t_fractol *gen) 
+static void	put_pixel_x(int y, t_fractol *gen)
 {
 	double	c_real;
 	double	c_imag;
@@ -40,7 +52,7 @@ static void	put_pixel_x(int y, t_fractol *gen)
 	}
 }
 
-void	burningship(t_fractol *generate) 
+void	burningship(t_fractol *generate)
 {
 	int			y;	
 	t_screen	screen;
@@ -49,7 +61,7 @@ void	burningship(t_fractol *generate)
 	screen = generate->screen;
 	generate->nav.x_offset = (screen.max_x - screen.min_x) / WIDTH;
 	generate->nav.y_offset = (screen.max_y - screen.min_y) / HEIGHT;
-	while (y < HEIGHT) 
+	while (y < HEIGHT)
 	{
 		put_pixel_x(y, generate);
 		y++;

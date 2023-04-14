@@ -6,18 +6,18 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/16 13:05:51 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/13 14:07:30 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/14 13:20:29 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-static int	iterations(int iter, double real, double imag) 
+static int	iterations(int iter, double real, double imag)
 {
-	double z_real;
-	double z_imag;
-	double nxt_real;
-	double next_z_imag;
+	double	z_real;
+	double	z_imag;
+	double	nxt_real;
+	double	next_z_imag;
 
 	z_real = 0.0;
 	z_imag = 0.0;
@@ -30,10 +30,10 @@ static int	iterations(int iter, double real, double imag)
 		z_imag = next_z_imag;
 		iter++;
 	}
-	return iter;
+	return (iter);
 }
 
-static void	put_pixel_x(int y, t_fractol *gen) 
+static void	put_pixel_x(int y, t_fractol *gen)
 {
 	double	c_real;
 	double	c_imag;
@@ -41,17 +41,17 @@ static void	put_pixel_x(int y, t_fractol *gen)
 	int		iter;
 
 	x = 0;
-	while (x < WIDTH) 
+	while (x < WIDTH)
 	{
 		c_real = gen->screen.min_x + x * gen->nav.x_offset + gen->nav.x_nav;
-		c_imag = gen->screen.min_y + y * gen->nav.y_offset+ gen->nav.y_nav;
+		c_imag = gen->screen.min_y + y * gen->nav.y_offset + gen->nav.y_nav;
 		iter = iterations(iter, c_real, c_imag);
 		get_color(gen, x, y, iter);
 		x++;
 	}
 }
 
-void	mandelbrot(t_fractol *generate) 
+void	mandelbrot(t_fractol *generate)
 {
 	t_screen	screen;
 	int			y;
@@ -60,7 +60,7 @@ void	mandelbrot(t_fractol *generate)
 	screen = generate->screen;
 	generate->nav.x_offset = (screen.max_x - screen.min_x) / WIDTH;
 	generate->nav.y_offset = (screen.max_y - screen.min_y) / HEIGHT;
-	while (y < HEIGHT) 
+	while (y < HEIGHT)
 	{
 		put_pixel_x(y, generate);
 		y++;

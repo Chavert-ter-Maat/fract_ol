@@ -6,15 +6,15 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/21 11:32:08 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/13 14:24:48 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/14 15:48:59 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-void	hook_keys(void* param)
+void	hook_keys(void *param)
 {
-	t_fractol *generate;
+	t_fractol	*generate;
 
 	generate = param;
 	hook_navigation(generate);
@@ -24,17 +24,16 @@ void	hook_keys(void* param)
 
 void	hook_navigation(t_fractol *generate)
 {
-
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(generate->mlx);
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_UP))
-		generate->nav.y_nav -= generate->nav.nav_step;
-	if (mlx_is_key_down(generate->mlx, MLX_KEY_DOWN))
-		generate->nav.y_nav += generate->nav.nav_step;
-	if (mlx_is_key_down(generate->mlx, MLX_KEY_LEFT))
-		generate->nav.x_nav -= generate->nav.nav_step;
-	if (mlx_is_key_down(generate->mlx, MLX_KEY_RIGHT))
-		generate->nav.x_nav += generate->nav.nav_step;
+		generate->nav.y_nav -= generate->nav.nav_step; //* generate->nav.zoom_in;
+	if (mlx_is_key_down(generate->mlx, MLX_KEY_DOWN))//
+		generate->nav.y_nav += generate->nav.nav_step; //* generate->nav.zoom_in;
+	if (mlx_is_key_down(generate->mlx, MLX_KEY_LEFT))//
+		generate->nav.x_nav -= generate->nav.nav_step; //* generate->nav.zoom_in;
+	if (mlx_is_key_down(generate->mlx, MLX_KEY_RIGHT))//
+		generate->nav.x_nav += generate->nav.nav_step; //* generate->nav.zoom_in;
 	update_fractal(generate);
 }
 
@@ -43,13 +42,15 @@ void	hook_zoom(t_fractol *generate)
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_W))
 		zoom_fractal(generate, 1);
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_S))
-		zoom_fractal(generate, - 1);
+		zoom_fractal(generate, -1);
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_A))
 		generate->nav.nav_step *= 3;
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_D))
 		generate->nav.nav_step /= 3;
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_R))
+	{
 		reset_fractol_settings(generate);
+	}
 	update_fractal(generate);
 }
 
@@ -57,12 +58,12 @@ void	hook_colors(t_fractol *generate)
 {
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_Q))
 	{
-		generate->colors.color_set1 += 0x7FB3DEFF; // yellow
-		generate->colors.color_set2 += 0x7FB3DEFF; // orange
-		generate->colors.color_set3 += 0x7FB3DEFF; // yellow
-		generate->colors.color_set4 += 0x7FB3DEFF; // red
-		generate->colors.color_set5 += 0x7FB3DEFF; // purple
-		generate->colors.color_set6 += 0x7FB3DEFF; // blue
+		generate->colors.color_set1 += 0x7FB3DEFF;
+		generate->colors.color_set2 += 0x7FB3DEFF;
+		generate->colors.color_set3 += 0x7FB3DEFF;
+		generate->colors.color_set4 += 0x7FB3DEFF;
+		generate->colors.color_set5 += 0x7FB3DEFF;
+		generate->colors.color_set6 += 0x7FB3DEFF;
 	}
 	update_fractal(generate);
 }
