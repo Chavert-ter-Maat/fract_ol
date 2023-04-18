@@ -6,7 +6,7 @@
 #    By: chaverttermaat <chaverttermaat@student.      +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/07 10:49:31 by chavertterm   #+#    #+#                  #
-#    Updated: 2023/04/14 14:04:44 by cter-maa      ########   odam.nl          #
+#    Updated: 2023/04/18 11:03:25 by cter-maa      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ SRC =	SRC/colors.c \
 		SRC/fractal_burning_ship.c \
 		SRC/fractal_mandelbrot.c \
 		SRC/fractal_julia.c \
-		SRC/hook_mlx.c \
+		SRC/hook_screen.c \
 		SRC/hook_keys.c \
 		SRC/hook_scroll.c \
 		SRC/init_colors.c \
@@ -64,7 +64,7 @@ $(NAME): $(OBJ)
 	$(MAKE) -C ./MLX42/build
 	$(MAKE) -C ./libft
 	$(MAKE) -C ./libft/ft_printf
-	$(CC) $(LDFLAGS) $(OBJ) $(INCLUDES) $(MLX) $(LIBFT) $(PRINTF) $(CFLAGS) $(SANITIZE) -o $(NAME) 
+	$(CC) $(LDFLAGS) $(OBJ) $(INCLUDES) $(MLX) $(LIBFT) $(PRINTF) $(CFLAGS) -o $(NAME) 
 	@echo "$(GREEN) Fract-ol compiled $(DEF_COLOR)"
 
 # RECIPES

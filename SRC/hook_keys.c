@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/21 11:32:08 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/14 15:48:59 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/18 17:02:59 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	hook_navigation(t_fractol *generate)
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(generate->mlx);
 	if (mlx_is_key_down(generate->mlx, MLX_KEY_UP))
-		generate->nav.y_nav -= generate->nav.nav_step; //* generate->nav.zoom_in;
-	if (mlx_is_key_down(generate->mlx, MLX_KEY_DOWN))//
-		generate->nav.y_nav += generate->nav.nav_step; //* generate->nav.zoom_in;
-	if (mlx_is_key_down(generate->mlx, MLX_KEY_LEFT))//
-		generate->nav.x_nav -= generate->nav.nav_step; //* generate->nav.zoom_in;
-	if (mlx_is_key_down(generate->mlx, MLX_KEY_RIGHT))//
-		generate->nav.x_nav += generate->nav.nav_step; //* generate->nav.zoom_in;
+		generate->nav.y_nav -= generate->nav.nav_step;
+	if (mlx_is_key_down(generate->mlx, MLX_KEY_DOWN))
+		generate->nav.y_nav += generate->nav.nav_step;
+	if (mlx_is_key_down(generate->mlx, MLX_KEY_LEFT))
+		generate->nav.x_nav -= generate->nav.nav_step;
+	if (mlx_is_key_down(generate->mlx, MLX_KEY_RIGHT))
+		generate->nav.x_nav += generate->nav.nav_step;
 	update_fractal(generate);
 }
 

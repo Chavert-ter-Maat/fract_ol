@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/03 12:47:00 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/14 15:53:06 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/18 17:04:34 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	zoom_fractal(t_fractol *generate, double y_offset)
 		zoom_out(generate);
 		generate->nav.nav_step /= generate->nav.zoom;
 	}
-	update_fractal(generate);
 }
 
 static void	scroll_julia(t_fractol *generate, double y_offset)
@@ -51,7 +50,6 @@ static void	scroll_julia(t_fractol *generate, double y_offset)
 		generate->nav.nav_step += 0.01;
 	else if (y_offset < 0)
 		generate->nav.nav_step -= 0.01;
-	update_fractal(generate);
 }
 
 void	hook_scroll(double x_offset, double y_offset, void *param)

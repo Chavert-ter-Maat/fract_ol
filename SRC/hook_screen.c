@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   hook_mlx.c                                         :+:    :+:            */
+/*   hook_screen.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/21 11:31:11 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/14 13:58:50 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/18 10:51:00 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,11 @@ void	hooks(t_fractol *generate)
 {
 	put_inscription(generate);
 	mlx_scroll_hook(generate->mlx, &hook_scroll, generate);
-	mlx_loop_hook(generate->mlx, hook_keys, generate);
+	if (mlx_loop_hook(generate->mlx, hook_keys, generate) == false)
+	{
+		puts(mlx_strerror(mlx_errno));
+		exit (EXIT_FAILURE);
+	}
 	mlx_loop(generate->mlx);
 	mlx_terminate(generate->mlx);
 }

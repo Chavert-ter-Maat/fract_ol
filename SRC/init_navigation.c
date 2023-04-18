@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/14 11:43:17 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/14 15:51:00 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/18 16:02:22 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ void	init_navigation_julia(t_fractol *generate)
 {
 	ft_bzero(&generate->nav, sizeof(&generate->nav));
 	generate->nav.zoom_factor = 0.9;
-	generate->nav.zoom_in = 1.0;
-	generate->nav.zoom_out = 1.0;
+	// generate->nav.zoom_in = 1.0;
+	// generate->nav.zoom_out = 1.0;
+	generate->nav.zoom = 1.0;
 	generate->nav.nav_step = 0.1;
 	generate->nav.x_nav = 0.0;
 	generate->nav.y_nav = 0.0;

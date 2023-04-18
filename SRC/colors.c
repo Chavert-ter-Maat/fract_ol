@@ -6,7 +6,7 @@
 /*   By: cter-maa <cter-maa@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/04 16:47:23 by cter-maa      #+#    #+#                 */
-/*   Updated: 2023/04/14 13:15:55 by cter-maa      ########   odam.nl         */
+/*   Updated: 2023/04/18 11:30:46 by cter-maa      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 int	get_color_set(t_fractol *generate, int iter)
 {
 	int	layer;
+	int	layer_range;
 
-	layer = iter / LAYER_RANGE;
+	layer_range = MAX_ITTER / NUM_LAYERS;
+	layer = iter / layer_range;
 	if (iter == MAX_ITTER)
 		return (generate->colors.black);
 	if (layer == 0)
